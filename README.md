@@ -10,7 +10,7 @@ This project is intended to be a simple template to get a local Django web app s
 
 1. Clone the repository `git clone https://github.com/buoy-engineering/django-template.git`
 2. Go to the root of the project `cd django-template`
-3. Initialize a virtual environment with venv (standard package in the python library) `python3 -m env .`
+3. Initialize a virtual environment with venv (standard package in the python library) `python3 -m venv .`
 4. Activate the virtual environment `source bin/activate`
 5. Install the project dependencies `pip3 install -r requirements.txt`
 
