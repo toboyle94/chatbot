@@ -17,7 +17,7 @@ instances, including Users.
 ## Setup
 
 1. Clone the repository `git clone https://github.com/toboyle94/chatbot.git`
-2. Go to the root of the project `cd django-template`
+2. Go to the root of the project `cd chatbot`
 3. Initialize a virtual environment with venv (standard package in the python library) `python3 -m venv .`
 4. Activate the virtual environment `source bin/activate`
 5. Install the project dependencies `pip3 install -r requirements.txt`
