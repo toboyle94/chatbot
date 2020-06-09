@@ -25,7 +25,9 @@ SECRET_KEY = 'sepcstpzo=dgk#&fwzv!dh#p5ym1#7a68#)=x(x)o_tjyjxjee'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+AUTH_USER_MODEL = 'chatbot.User'
 
 
 # Application definition
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chatbot'
 ]
 
 MIDDLEWARE = [
