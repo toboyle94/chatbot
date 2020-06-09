@@ -14,10 +14,23 @@
     }
 </style>
 
+<form action="{% url 'question_list' %}" style="margin-left: 100px;">
+    <input style="padding: 10px 15px; border-radius: 2px;" type="submit" value="« Back to Questions List" />
+</form>
+
 <div class="container">
     <h1>Title: {{ question.title }}</h1>
-    <h3>current text:</h3>
+    <h3>Current text:</h3>
     <p>{{ question.current_text }}</p>
+
+    <h3>Update current text:</h3>
+    <form action="{% url 'question' id=question.id %}" method="POST">
+        <div>
+            <textarea name="question_text" rows="5" cols="50"></textarea>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
     <h3>diffs to old versions:</h3>
     {% for text_diff in previous_text_version_diffs %}
         <div>

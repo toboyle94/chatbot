@@ -23,6 +23,10 @@ class Question(TimestampedModel):
     def current_text(self):
         return self.text_variations.order_by('-created').first().text
 
+    @property
+    def previous_text_versions(self):
+        return (n.text for n in self.text_variations.order_by('-created')[1:])
+
 
 class QuestionText(TimestampedModel):
     question = models.ForeignKey(Question, related_name='text_variations', on_delete=models.CASCADE)

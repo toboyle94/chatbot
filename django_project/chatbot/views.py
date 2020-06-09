@@ -1,6 +1,7 @@
 from difflib import ndiff
 
 from django.views.generic import ListView, DetailView
+
 from chatbot.models import Question, QuestionText
 
 
@@ -16,13 +17,20 @@ class QuestionDetail(DetailView):
     slug_url_kwarg = 'id'
     slug_field = 'id'
 
+    def post(self, request, *args, **kwargs):
+        new_question_text = request.POST['question_text']
+        question = self.get_object()
+
+        QuestionText.objects.create(text=new_question_text, question=question)
+        return self.get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data()
 
-        previous_text_version_diffs = []
-        for question_text in self.object.text_variations.order_by('-created')[1:]:
-            text_diff = ndiff(question_text.text.split(), self.object.current_text.split())
-            previous_text_version_diffs.append(text_diff)
+        diffs_to_current = []
+        for old_text in self.object.previous_text_versions:
+            text_diff = ndiff(old_text.split(), self.object.current_text.split())
+            diffs_to_current.append(text_diff)
 
-        context_data['previous_text_version_diffs'] = previous_text_version_diffs
+        context_data['previous_text_version_diffs'] = diffs_to_current
         return context_data
