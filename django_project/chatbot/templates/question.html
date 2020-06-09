@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+    .removed-word {
+        background-color: lightcoral;
+    }
+    .added-word {
+        background-color: lightgreen;
+    }
+</style>
+
+<form action="{% url 'question_list' %}" style="margin-left: 100px;">
+    <input style="padding: 10px 15px; border-radius: 2px;" type="submit" value="« Back to Questions List" />
+</form>
+
+<div class="container">
+    <h1>Title: {{ question.title }}</h1>
+    <h3>Current text:</h3>
+    <p>{{ question.current_text }}</p>
+
+    <h3>Update current text:</h3>
+    <form action="{% url 'question' id=question.id %}" method="POST">
+        <div>
+            <textarea name="question_text" rows="5" cols="50"></textarea>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h3>diffs to old versions:</h3>
+    {% for text_diff in previous_text_version_diffs %}
+        <div>
+            {% for word in text_diff%}
+                {% if word.0 == '-' %}
+                    <span class="removed-word">{{ word }}</span>
+                {% elif word.0 == '+' %}
+                    <span class="added-word">{{ word }}</span>
+                {% else %}
+                    <span>{{ word }}</span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

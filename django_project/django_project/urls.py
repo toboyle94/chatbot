@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
+
+from chatbot.views import QuestionList, QuestionDetail
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('question/<int:id>/', csrf_exempt(QuestionDetail.as_view()), name='question'),
+    path('question/', QuestionList.as_view(), name='question_list'),
 ]
