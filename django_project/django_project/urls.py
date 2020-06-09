@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from chatbot.views import QuestionList, QuestionDetail
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('question/<int:id>/', QuestionDetail.as_view(), name='question'),
+    path('question/', QuestionList.as_view()),
 ]

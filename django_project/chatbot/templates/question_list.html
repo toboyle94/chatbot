@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+    .question {
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px black solid;
+    }
+    .question:hover {
+        background-color: lightgrey;
+        cursor: pointer;
+    }
+</style>
+
+<div class="container">
+    <h1>Question List</h1>
+    {% for question in questions %}
+        <a href="{% url 'question' id=question.id %}">
+            <div class="question">{{question.current_text}}</div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}
